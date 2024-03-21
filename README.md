@@ -25,7 +25,7 @@
 <br />
 <div align="center">
 
-<h3 align="center">Transporter Robots Exercise</h3>
+<h3 align="center">Prey Predator Exercise</h3>
 
   <p align="center">
     AMAS Exercise using the AMAK framework
@@ -33,9 +33,9 @@
     <a href="https://github.com/alexandreprl/amak"><strong>AMAK Framework »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/alexandreprl/amak-exercise-transporter-robots/issues">Report Bug</a>
+    <a href="https://github.com/alexandreprl/amak-exercise-prey-predator/issues">Report Bug</a>
     ·
-    <a href="https://github.com/alexandreprl/amak-exercise-transporter-robots/issues">Request Feature</a>
+    <a href="https://github.com/alexandreprl/amak-exercise-prey-predator/issues">Request Feature</a>
   </p>
 </div>
 
@@ -43,13 +43,14 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Exercise
-![Screenshot](https://github.com/alexandreprl/amak-exercise-transporter-robots/blob/main/preview.png?raw=true)
 
-A room contains two area: the pick-up area in green and the drop-off area in red. Multiple boxes are present in the green area and must be moved to the red area.
+The goal is to implement a simulation of a prey-predator ecosystem.
 
-To do that, a set of autonomous robots have been deployed. These robots can carry one box at a time and drop it anywhere.
+The wolves eat the sheeps to gain lives, die if they run out of lives and can reproduce. 
 
-The two areas are separated by a wall. To go from one side of the wall to the other, the robots can use two corridors: one at the top one at the bottom. The width of the corridor is such that only one robot can go through it. Also, two robots cannot be at the same location at the same time.
+The sheeps eat the grass to gain lives, die if they run out of lives and can reproduce.
+
+The grass grows at a fixed rate and can be eaten by the sheeps only when fully grown.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -60,14 +61,12 @@ The two areas are separated by a wall. To go from one side of the wall to the ot
 
 * Fork the project
 * Clone the forked version
-* Open the project in your favorite IDE
+* Open the project in your favorite IDE (Use open project in IntelliJ IDEA or Import Gradle Project in Eclipse)
 * Run Launcher.main()
 * Adjust simulation speed
 
 ### Exercise
-
-The class __RobotAgent__ contains the behavior of a transporter robot. A basic version has been implemented in which they randomly move, pick a box if there is one and drop it if they are in the drop zone.
-Remove the content of the method _onDecideAndAct_ and replace it with a cooperative behavior.
+Implement the behaviour of the sheeps and wolves in a simulation to reach a stable ecosystem.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

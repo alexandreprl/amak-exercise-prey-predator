@@ -1,4 +1,4 @@
-rootProject.name = 'amak-exercise-transporter-robots'
+rootProject.name = 'amak-exercise-prey-predator'
 
 // Uncomment these two lines to get AMAK from local
 //include ':amak'
