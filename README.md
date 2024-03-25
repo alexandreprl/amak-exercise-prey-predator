@@ -66,7 +66,20 @@ The grass grows at a fixed rate and can be eaten by the sheeps only when fully g
 * Adjust simulation speed
 
 ### Exercise
-Implement the behaviour of the sheeps and wolves in a simulation to reach a stable ecosystem.
+Tune the parameters and implement the behaviour of the sheeps and wolves in a simulation to reach a stable ecosystem.
+
+### Useful methods
+- GenericAgent#addLives(int)
+- GenericAgent#reproduce()
+- GenericAgent#moveRandomly()
+- Land#eatGrass(int, int)
+- Land#getSheepAgentsAroundPosition(int, int)
+- GenericAgent#destroy(): Remove the agent from the simulation
+
+### Already implemented
+- Grass growth: Each grass grows at a fixed rate
+- Death of sheeps and wolves: When they run out of lives, they die
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

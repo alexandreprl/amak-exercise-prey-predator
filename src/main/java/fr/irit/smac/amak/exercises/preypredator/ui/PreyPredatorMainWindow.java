@@ -26,31 +26,33 @@ public class PreyPredatorMainWindow extends MainWindow {
 	private final Map<GenericAgent, DrawableImage> agentDrawables = new HashMap<>();
 	private final String sheepFilename;
 	private final String wolfFilename;
-	private final Drawable[][] grassDrawables = new DrawableRectangle[Land.ROOM_WIDTH][Land.ROOM_HEIGHT];
+	private final Drawable[][] grassDrawables;
 
 	public PreyPredatorMainWindow(PreyPredatorAmas amas) {
 		super();
 		this.amas = amas;
-
+		grassDrawables = new Drawable[amas.getEnvironment().getSimulationParameters().getLandWidth()][amas.getEnvironment().getSimulationParameters().getLandHeight()];
 		sheepFilename = getClass().getResource("/sheep.png").getFile();
 		wolfFilename = getClass().getResource("/wolf.png").getFile();
 
 		vectorialGraphicsPanel = new VectorialGraphicsPanel("Map");
-		vectorialGraphicsPanel.setDefaultView(80, -400, -250);
+		var x = amas.getEnvironment().getSimulationParameters().getLandWidth() * -10/2;
+		var y = amas.getEnvironment().getSimulationParameters().getLandHeight() * -10/2;
+		vectorialGraphicsPanel.setDefaultView(80, x, y);
 		setLeftPanel(vectorialGraphicsPanel);
 		RenderWalls();
 	}
 
 	private void RenderWalls() {
 		// Create drawable rectangle for each grass
-		for (var x = 0; x < Land.ROOM_WIDTH; x++) {
-			for (var y = 0; y < Land.ROOM_HEIGHT; y++) {
+		for (var x = 0; x < amas.getEnvironment().getSimulationParameters().getLandWidth(); x++) {
+			for (var y = 0; y < amas.getEnvironment().getSimulationParameters().getLandHeight(); y++) {
 				grassDrawables[x][y] = new DrawableRectangle(vectorialGraphicsPanel, x * 10, y * 10, 10, 10).setColor(new Color(0, 255, 0)).setLayer(GRASS_LAYER);
 			}
 		}
 
-		for (var x = -1; x < Land.ROOM_WIDTH + 1; x++) {
-			for (var y = -1; y < Land.ROOM_HEIGHT + 1; y++) {
+		for (var x = -1; x < amas.getEnvironment().getSimulationParameters().getLandWidth() + 1; x++) {
+			for (var y = -1; y < amas.getEnvironment().getSimulationParameters().getLandHeight() + 1; y++) {
 				if (!amas.getEnvironment().isPositionValid(x, y))
 					new DrawableRectangle(vectorialGraphicsPanel, x * 10, y * 10, 10, 10).setColor(new Color(191, 191, 191)).setLayer(OBSTACLE_LAYER);
 			}
@@ -72,9 +74,9 @@ public class PreyPredatorMainWindow extends MainWindow {
 			}
 		}
 		// Change the grass color based on the value
-		for (var x = 0; x < Land.ROOM_WIDTH; x++) {
-			for (var y = 0; y < Land.ROOM_HEIGHT; y++) {
-				int green = (int) Math.floor((double) (amas.getEnvironment().getGrass(x, y)) / (double) Land.MAX_GRASS * 255);
+		for (var x = 0; x < amas.getEnvironment().getSimulationParameters().getLandWidth(); x++) {
+			for (var y = 0; y < amas.getEnvironment().getSimulationParameters().getLandHeight(); y++) {
+				int green = (int) Math.floor((double) (amas.getEnvironment().getGrass(x, y)) / (double) amas.getEnvironment().getSimulationParameters().getMaxGrassLife() * 255);
 				grassDrawables[x][y].setColor(new Color(0, green, 0));
 			}
 		}

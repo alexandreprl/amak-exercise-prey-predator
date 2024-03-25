@@ -11,22 +11,24 @@ import java.util.Optional;
 
 
 public class Land extends Environment {
-	public final static int ROOM_WIDTH = 80;
-	public final static int ROOM_HEIGHT = 50;
-	public static final int MAX_GRASS = 100;
-	private final GenericAgent[][] genericAgentsGrid = new GenericAgent[ROOM_WIDTH][ROOM_HEIGHT];
-	private final int[][] grass = new int[ROOM_WIDTH][ROOM_HEIGHT];
+	@Getter
+	private final SimulationParameters simulationParameters;
+	private final GenericAgent[][] genericAgentsGrid;
+	private final int[][] grass;
 
-	public Land() {
-		for (int i = 0; i < ROOM_WIDTH; i++) {
-			for (int j = 0; j < ROOM_HEIGHT; j++) {
-				grass[i][j] = MAX_GRASS;
+	public Land(SimulationParameters simulationParameters) {
+		this.simulationParameters = simulationParameters;
+		this.genericAgentsGrid = new GenericAgent[simulationParameters.getLandWidth()][simulationParameters.getLandHeight()];
+		this.grass = new int[simulationParameters.getLandWidth()][simulationParameters.getLandHeight()];
+		for (int i = 0; i < simulationParameters.getLandWidth(); i++) {
+			for (int j = 0; j < simulationParameters.getLandHeight(); j++) {
+				grass[i][j] = simulationParameters.getMaxGrassLife();
 			}
 		}
 	}
 
 	public boolean move(GenericAgent genericAgent, int x, int y) {
-		if (x < 0 || x >= ROOM_WIDTH || y < 0 || y >= ROOM_HEIGHT)
+		if (x < 0 || x >= simulationParameters.getLandWidth() || y < 0 || y >= simulationParameters.getLandHeight())
 			return false;
 		if (genericAgentsGrid[x][y] != null && genericAgentsGrid[x][y] != genericAgent)
 			return false;
@@ -37,7 +39,7 @@ public class Land extends Environment {
 	}
 
 	public boolean isPositionValid(int x, int y) {
-		if (x < 0 || x > ROOM_WIDTH - 1 || y < 0 || y > ROOM_HEIGHT - 1)
+		if (x < 0 || x > simulationParameters.getLandWidth() - 1 || y < 0 || y > simulationParameters.getLandHeight() - 1)
 			return false;
 		return true;
 	}
@@ -50,9 +52,9 @@ public class Land extends Environment {
 
 	@Override
 	public void onCycle() {
-		for (int i = 0; i < ROOM_WIDTH; i++) {
-			for (int j = 0; j < ROOM_HEIGHT; j++) {
-				grass[i][j] = Math.min(grass[i][j] + 1, MAX_GRASS);
+		for (int i = 0; i < simulationParameters.getLandWidth(); i++) {
+			for (int j = 0; j < simulationParameters.getLandHeight(); j++) {
+				grass[i][j] = Math.min(grass[i][j] + 1, simulationParameters.getMaxGrassLife());
 			}
 		}
 	}
@@ -71,7 +73,7 @@ public class Land extends Environment {
 	}
 
 	public boolean canEatGrass(int x, int y) {
-		return grass[x][y] == MAX_GRASS;
+		return grass[x][y] == simulationParameters.getMaxGrassLife();
 	}
 
 	public List<SheepAgent> getSheepAgentsAroundPosition(int x, int y) {

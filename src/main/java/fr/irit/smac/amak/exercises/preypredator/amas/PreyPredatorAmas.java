@@ -10,11 +10,17 @@ public class PreyPredatorAmas extends Amas<Land> {
 
 	@Override
 	protected void onInitialAgentsCreation() {
-		for (int i = 0; i < 5; i++) {
-			new SheepAgent(this, 10, this.getEnvironment().getRandom().nextInt(Land.ROOM_WIDTH), this.getEnvironment().getRandom().nextInt(Land.ROOM_HEIGHT));
+		for (int i = 0; i < getEnvironment().getSimulationParameters().getInitialSheepCount(); i++) {
+			new SheepAgent(this,
+			               getEnvironment().getSimulationParameters().getInitialSheepLives(),
+			               this.getEnvironment().getRandom().nextInt(getEnvironment().getSimulationParameters().getLandWidth()),
+			               this.getEnvironment().getRandom().nextInt(getEnvironment().getSimulationParameters().getLandHeight()));
 		}
-		for (int i = 0; i < 5; i++) {
-			new WolfAgent(this, 10, this.getEnvironment().getRandom().nextInt(Land.ROOM_WIDTH), this.getEnvironment().getRandom().nextInt(Land.ROOM_HEIGHT));
+		for (int i = 0; i < getEnvironment().getSimulationParameters().getInitialWolfCount(); i++) {
+			new WolfAgent(this,
+			              getEnvironment().getSimulationParameters().getInitialWolfLives(),
+			              this.getEnvironment().getRandom().nextInt(getEnvironment().getSimulationParameters().getLandWidth()),
+			              this.getEnvironment().getRandom().nextInt(getEnvironment().getSimulationParameters().getLandHeight()));
 		}
 	}
 }

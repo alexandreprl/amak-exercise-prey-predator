@@ -40,7 +40,8 @@ public abstract class GenericAgent extends Agent<PreyPredatorAmas, Land> {
 	// Create a new agent with the same type at the same position
 	protected void reproduce() {
 		try {
-			getClass().getConstructor(PreyPredatorAmas.class, int.class, int.class, int.class).newInstance(amas, lives, x, y);
+			getClass().getConstructor(PreyPredatorAmas.class, int.class, int.class, int.class)
+			          .newInstance(amas, lives, x, y);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
