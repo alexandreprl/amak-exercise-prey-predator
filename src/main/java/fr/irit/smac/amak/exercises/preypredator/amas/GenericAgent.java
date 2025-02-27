@@ -26,6 +26,11 @@ public abstract class GenericAgent extends Agent<PreyPredatorAmas, Land> {
 	}
 
 	@Override
+	protected void onDestroy() {
+		amas.getEnvironment().removeAgent(this, x, y);
+	}
+
+	@Override
 	protected final void onAgentCycleEnd() {
 		lives--;
 		if (lives <= 0) {
