@@ -6,6 +6,11 @@ public class WolfAgent extends GenericAgent {
 	}
 
 	@Override
+	protected void onPerceive() {
+
+	}
+
+	@Override
 	protected void onDecideAndAct() {
 		moveRandomly();
 	}
